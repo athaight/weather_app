@@ -12,7 +12,7 @@ let date = month + '/' + day + '/' + year + ' - ' + hour + ':' + minutes;
 console.log(date)
 
 let weather = {
-FetchWeather: function(city) {
+fetchWeather: function(city) {
     fetch(
         "https://api.openweathermap.org/data/2.5/weather?q=" 
         + city + "&units=imperial&appid=" 
@@ -27,19 +27,18 @@ displayWeather: function(data) {
     const { temp, humidity } = data.main;
     const { speed } = data.wind;
     const { visibility } = data.visibility;
-    console.log(name,description,temp,humidity,speed)
+    console.log(name,description,temp,humidity,speed, visibility)
     document.querySelector('.city').innerText = 'Weather in ' + name;
-    // document.querySelector('.icon').src = 'https://openweathermap.org/img/wn/' + icon + '.png';
     document.querySelector('.description').innerText = description;
     document.querySelector('.temp').innerText = temp + "° f";
     document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
     document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
     document.querySelector('.visibility').innerText = "Visibility: " + visibility;
     document.querySelector('.weather').classList.remove("loading");
-    document.body.style.backgroundImage = url("https://source.unsplash.com/1600x900/?nature,landscape")
+    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "-City')";
 },
 search: function () {
-    this.FetchWeather(document.querySelector('.search-bar').value);
+    this.fetchWeather(document.querySelector('.search-bar').value);
 }
 };
 
@@ -53,4 +52,24 @@ document.querySelector('.search-bar').addEventListener('keyup', function(e) {
 }
 });
 
-weather.FetchWeather('South Amboy');
+weather.fetchWeather('Tempe');
+
+let forcast = {
+    fetchForcast: function(city) {
+        fetch(
+            "https://api.openweathermap.org/data/2.5/forcast?q=" 
+            + city + "&units=imperial&appid=" 
+            + apiKey
+        )
+        .then((response) => response.json())
+        .then((data) => this.displayWeather(data))
+    },
+displayForcast: function(data) {
+    const { name } = data;
+    const { description } = data.weather[0];
+    const { temp, humidity } = data.main;
+    const { speed } = data.wind;
+    const { visibility } = data.visibility;
+    console.log(name,description,temp,humidity,speed, visibility)
+}
+}
