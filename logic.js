@@ -35,6 +35,8 @@ displayWeather: function(data) {
     document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
     document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
     document.querySelector('.visibility').innerText = "Visibility: " + visibility;
+    document.querySelector('.weather').classList.remove("loading");
+    document.body.style.backgroundImage = url("https://source.unsplash.com/1600x900/?nature,landscape")
 },
 search: function () {
     this.FetchWeather(document.querySelector('.search-bar').value);
@@ -51,4 +53,4 @@ document.querySelector('.search-bar').addEventListener('keyup', function(e) {
 }
 });
 
-weather.FetchWeather('Denver');
+weather.FetchWeather('South Amboy');
