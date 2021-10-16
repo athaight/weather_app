@@ -9,23 +9,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/7ec25c2080.js" crossorigin="anonymous"></script>
+<script src="logic.js" defer></script>
 <title>Weather Info</title>
 </head>
 
 <body>
     <div class="card">
-            <form action="" id="search" class="title row">
-                <lable class="form-title"></lable>
-                <input type="text" id="" class=""  placeholder="Enter city here..."/>
-                <button class=""><i class="fas fa-search"></i></i></button>
+        <div class="search">
+            <form action="" id="search" class="search row">
+                <input type="text"class="search-bar" placeholder="Enter city here..."/>
+                <button><i class="fas fa-search"></i></i></button>
             </form>
-        <div class="container">
-            <h2 class="city" id="">Weather in city</h2>
-            <h2 id="temp" class="current">Temp°:</h2>
+        </div>
+        <div class="weather">
+            <h2 class="city">Weather in city</h2>
+            <h2 id="temp" class="temp">Temp°:</h2>
             <p id="description" class="description">Cloudy</p>
-            <p id="wind" class="current">Wind:</p>
-            <p id="humidity" class="current">Humidity:</p>
-            <p id="uvi" class="current">UVI</p>
+            <p id="wind" class="wind">Wind:</p>
+            <p id="humidity" class="humidity">Humidity:</p>
+            <p id="visibility" class="visibility">Visibility:</p>
         </div>
     </div>
 
@@ -37,6 +39,6 @@
         <div id="day-five">5</div>
     </div>
 
-    <script src="logic.js"></script>
+  
 </body>
 </html>

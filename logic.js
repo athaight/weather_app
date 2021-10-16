@@ -11,10 +11,6 @@ let minutes = String(today.getMinutes());
 let date = month + '/' + day + '/' + year + ' - ' + hour + ':' + minutes;
 console.log(date)
 
-let temp = document.querySelector('temp');
-let wind = document.querySelector('wind');
-let humidity = document.querySelector('humidity');
-let uvi = document.querySelector('uvi');
 let weather = {
 FetchWeather: function(city) {
     fetch(
@@ -27,9 +23,24 @@ FetchWeather: function(city) {
 },
 displayWeather: function(data) {
     const { name } = data;
-    const { icon, description } = data.weather[0];
+    const { description } = data.weather[0];
     const { temp, humidity } = data.main;
     const { speed } = data.wind;
-    console.log(name,icon,description,temp,humidity,speed)
+    const { visibility } = data.visibility;
+    console.log(name,description,temp,humidity,speed)
+    document.querySelector('.city').innerText = 'Weather in ' + name;
+    // document.querySelector('.icon').src = 'https://openweathermap.org/img/wn/' + icon + '.png';
+    document.querySelector('.description').innerText = description;
+    document.querySelector('.temp').innerText = temp + "° f";
+    document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
+    document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
+    document.querySelector('.visibility').innerText = "Visibility: " + visibility;
+},
+search: function () {
+    this.FetchWeather(document.querySelector('.search-bar').value);
 }
-}
+};
+
+document.querySelector('.search button').addEventListener('click', function () {
+weather.search();
+})
