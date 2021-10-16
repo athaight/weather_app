@@ -4,43 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
-    <title>Weather Info</title>
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/7ec25c2080.js" crossorigin="anonymous"></script>
+<title>Weather Info</title>
 </head>
-<body class="container bg-dark">
-    <header>
-        <nav>
-            <div class="nav-wrapper">
-              <a href="#" class="brand-logo center">Weather Info</a>
-            </div>
-          </nav>
-    </header> 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form action="" id="search" class="title">
-                    <lable class="form-title">City</lable>
-                    <input type="text" id="" class=""  placeholder="Enter city here..."/>
-                    <button class="">Search</button>
-                </form>
-                <div id="recent-cities" class="">
-                    <button id="recent-cities-btn" class="">recent</button>
-                </div>
-            </div>
+
+<body>
+    <div class="card">
+            <form action="" id="search" class="title row">
+                <lable class="form-title"></lable>
+                <input type="text" id="" class=""  placeholder="Enter city here..."/>
+                <button class=""><i class="fas fa-search"></i></i></button>
+            </form>
+        <div class="container">
+            <h2 class="city" id="">Weather in city</h2>
+            <h2 id="temp" class="current">Temp°:</h2>
+            <p id="description" class="description">Cloudy</p>
+            <p id="wind" class="current">Wind:</p>
+            <p id="humidity" class="current">Humidity:</p>
+            <p id="uvi" class="current">UVI</p>
         </div>
-    </div> 
-    <div class="container">
-        <h2 class="city" id=""></h2>
-        <p id="temp" class="current">temp</p>
-        <p id="wind" class="current">wind</p>
-        <p id="humidity" class="current">humidity</p>
-        <p id="uvi" class="current">uvi</p>
     </div>
+
     <div class="container five-day">
         <div id="day-one">1</div>
         <div id="day-two">2</div>
@@ -48,6 +36,7 @@
         <div id="day-four">4</div>
         <div id="day-five">5</div>
     </div>
+
     <script src="logic.js"></script>
 </body>
 </html>
