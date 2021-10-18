@@ -38,79 +38,96 @@ let oneCall = "https://api.openweathermap.org/data/2.5/onecall?";
 
 // TODO Introduce for loop to get data for current day (fiveDay)
 
-let weather = {
-    fetchWeather: function(city) {
-        localStorage.setItem("city", JSON.stringify(city));
-        storedCities();
-        
-        const params = new URLSearchParams({ q: city, appid: apiKey });
-            fetch(geoLoc + params)
-            .then((response) => response.json())
-            .then(function (data) {
-            const lat = data[0].lat;
-            const lon = data[0].lon;
 
-            const params = new URLSearchParams({
-                lat: lat,
-                lon: lon,
-                units: "imperial",
-                appid: apiKey,
-            });
-            return fetch(oneCall + params);
-            })
-            .then((response) => response.json())
-            .then((data) => this.displayWeather(data))
-            .then(buildDashboard);
-            
-        },
-        displayWeather: function(data) {
-
-            const city = JSON.parse(localStorage.getItem("city"));
-            
-            const { description } = data.current.weather[0];
-            const { temp, humidity, visibility, wind_speed:speed } = data.current;
-
-            console.log(city,description,temp,humidity,visibility,speed);
-            
-
-            document.querySelector('.city').innerText = city;
-            document.querySelector('.date').innerText = date;
-            document.querySelector('.description').innerText = description;
-            document.querySelector('.temp').innerText = temp + "° f";
-            document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
-            document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
-            document.querySelector('.visibility').innerText = "Visibility: " + visibility;
-            document.querySelector('.weather').classList.remove("loading");
-
-            document.querySelector('.dayOneDate').innerText = today1;
-            document.querySelector('.dayTwoDate').innerText = today2;
-            document.querySelector('.dayThreeDate').innerText = today3;
-            document.querySelector('.dayFourDate').innerText = today4;
-            document.querySelector('.dayFiveDate').innerText = today5;
-            document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + city + "-City')";
-            
-            document.querySelector('.dayOneTemp').innerText = data.daily[0].temp;
-      
-        },
-    search: function () {
-        this.fetchWeather(document.querySelector('.search-bar').value);
-   
-    } 
+function fetchWeather(city) {
+    localStorage.setItem("city", JSON.stringify(city));
+    storedCities();
     
+    const params = new URLSearchParams({ q: city, appid: apiKey });
+        fetch(geoLoc + params)
+        .then((response) => response.json())
+        .then(function (data) {
+        const lat = data[0].lat;
+        const lon = data[0].lon;
 
-};
+        const params = new URLSearchParams({
+            lat: lat,
+            lon: lon,
+            units: "imperial",
+            appid: apiKey,
+        });
+        return fetch(oneCall + params);
+        })
+        .then((response) => response.json())
+        // .then((data) => this.displayWeather(data))
+        .then(displayWeather);
 
+}
+    
+function displayWeather(weather) {
+    const city = JSON.parse(localStorage.getItem("city"));
+    
+    // TODO Why / How : not right/to fix 
+    const descr = weather.current.weather[1];
+    const description = weather.current.weather.description;
+
+    const { temp, humidity, visibility, wind_speed:speed } = weather.current;
+    const uvi = weather.current.uvi;
+    console.log("UVI = " + uvi + "_" + descr)
+    console.log(city,description,temp,humidity,visibility,speed);
+    document.querySelector('.city').innerText = city;
+    document.querySelector('.date').innerText = date;
+    document.querySelector('.description').innerText = description;
+    document.querySelector('.temp').innerText = temp + "° f";
+    document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
+    document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
+    document.querySelector('.uvi').innerText = "UVI: " + uvi;
+    document.querySelector('.visibility').innerText = "Visibility: " + visibility;
+    document.querySelector('.weather').classList.remove("loading");
+
+    document.querySelector('.dayOneDate').innerText = today1;
+    document.querySelector('.dayTwoDate').innerText = today2;
+    document.querySelector('.dayThreeDate').innerText = today3;
+    document.querySelector('.dayFourDate').innerText = today4;
+    document.querySelector('.dayFiveDate').innerText = today5;
+    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + city + "-City')";
+    document.querySelector('.dayOneTemp').innerText = weather.daily[1].temp.max;
+}
+
+// TODO Figure out why/how : notwork/to work
+function uviBgColor() {
+   let uviColor = document.querySelector('.uvi');
+    if (uvi < 3) {
+        uviColor.classList.add("green");
+    } else if (uvi < 7) {
+        uviColor.classList.add("yellow");
+    } else {
+        uviColor.classList.add("red");
+    };
+  }
+  uviBgColor();
+
+// function fiveDayData(data) {
+    //     const { temp } = data.current; 
+//     console.log(temp)
+// }
+// fiveDayData();
+
+function search() {
+    this.fetchWeather(document.querySelector('.search-bar').value);
+} 
+    
 document.querySelector('.search button').addEventListener('click', function () {
-weather.search();
+    search();
 })
 
 document.querySelector('.search-bar').addEventListener('keyup', function(e) {
     if (e.key == "Enter") {
-        weather.search();
-}
+        search();
+    }
 });
 
-weather.fetchWeather('Tempe');
+fetchWeather('Tempe');
 
 const dayOneTemp = document.querySelector('.dayOneTemp')
 const dayOneDescription = document.querySelector('.dayOneDescription')
