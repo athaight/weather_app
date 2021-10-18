@@ -1,45 +1,103 @@
-const apiKey = "8b4d320427abe778710968ffa0a03a6c"
-const oneCall = `https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=${ apiKey }`;
-const geoCords = `https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=${ apiKey }`;
 const today = new Date();
-let day = String(today.getDate()).padStart(2, '0');
+
+let dayName = today.toDateString();
+let date =  dayName;
+
+let day = today.getDay();
 let month = String(today.getMonth() + 1).padStart(2, '0'); 
 let year = today.getFullYear();
 let hour = String(today.getHours());
 let minutes = String(today.getMinutes());
 
-let date = month + '/' + day + '/' + year + ' - ' + hour + ':' + minutes;
-console.log(date)
+let dayOneDay = String(today.getDate() +1).padStart(2, '0')
+let dayTwoDay = String(today.getDate() +2).padStart(2, '0')
+let dayThreeDay = String(today.getDate() +3).padStart(2, '0')
+let dayFourDay = String(today.getDate() +4).padStart(2, '0')
+let dayFiveDay = String(today.getDate() +5).padStart(2, '0')
+
+let dateOne = month + '/' + dayOneDay + '/' + year;
+let dateTwo = month + '/' + dayTwoDay + '/' + year;
+let dateThree = month + '/' + dayThreeDay + '/' + year;
+let dateFour = month + '/' + dayFourDay + '/' + year;
+let dateFive = month + '/' + dayFiveDay + '/' + year;
+
+console.log('dayOneDay: ' + dayOneDay + ' dayTwoDay: ' + dayTwoDay)
+
+const fiveDayWeather = document.querySelector("#fiveDayWeather");
+// fiveDayWeather.style.display = "none";
+
+const today1 = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+1);
+const today2 = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+2);
+const today3 = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+3);
+const today4 = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+4);
+const today5 = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+5);
+
+const apiKey = "8b4d320427abe778710968ffa0a03a6c"
+let geoLoc = "http://api.openweathermap.org/geo/1.0/direct?";
+let oneCall = "https://api.openweathermap.org/data/2.5/onecall?";
+
+// TODO Introduce for loop to get data for current day (fiveDay)
 
 let weather = {
-fetchWeather: function(city) {
-    fetch(
-        "https://api.openweathermap.org/data/2.5/weather?q=" 
-        + city + "&units=imperial&appid=" 
-        + apiKey
-    )
-    .then((response) => response.json())
-    .then((data) => this.displayWeather(data))
-},
-displayWeather: function(data) {
-    const { name } = data;
-    const { description } = data.weather[0];
-    const { temp, humidity } = data.main;
-    const { speed } = data.wind;
-    const { visibility } = data.visibility;
-    console.log(name,description,temp,humidity,speed, visibility)
-    document.querySelector('.city').innerText = 'Weather in ' + name;
-    document.querySelector('.description').innerText = description;
-    document.querySelector('.temp').innerText = temp + "° f";
-    document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
-    document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
-    document.querySelector('.visibility').innerText = "Visibility: " + visibility;
-    document.querySelector('.weather').classList.remove("loading");
-    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "-City')";
-},
-search: function () {
-    this.fetchWeather(document.querySelector('.search-bar').value);
-}
+    fetchWeather: function(city) {
+        localStorage.setItem("city", JSON.stringify(city));
+        storedCities();
+        
+        const params = new URLSearchParams({ q: city, appid: apiKey });
+            fetch(geoLoc + params)
+            .then((response) => response.json())
+            .then(function (data) {
+            const lat = data[0].lat;
+            const lon = data[0].lon;
+
+            const params = new URLSearchParams({
+                lat: lat,
+                lon: lon,
+                units: "imperial",
+                appid: apiKey,
+            });
+            return fetch(oneCall + params);
+            })
+            .then((response) => response.json())
+            .then((data) => this.displayWeather(data))
+            .then(buildDashboard);
+            
+        },
+        displayWeather: function(data) {
+
+            const city = JSON.parse(localStorage.getItem("city"));
+            
+            const { description } = data.current.weather[0];
+            const { temp, humidity, visibility, wind_speed:speed } = data.current;
+
+            console.log(city,description,temp,humidity,visibility,speed);
+            
+
+            document.querySelector('.city').innerText = city;
+            document.querySelector('.date').innerText = date;
+            document.querySelector('.description').innerText = description;
+            document.querySelector('.temp').innerText = temp + "° f";
+            document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
+            document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
+            document.querySelector('.visibility').innerText = "Visibility: " + visibility;
+            document.querySelector('.weather').classList.remove("loading");
+
+            document.querySelector('.dayOneDate').innerText = today1;
+            document.querySelector('.dayTwoDate').innerText = today2;
+            document.querySelector('.dayThreeDate').innerText = today3;
+            document.querySelector('.dayFourDate').innerText = today4;
+            document.querySelector('.dayFiveDate').innerText = today5;
+            document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + city + "-City')";
+            
+            document.querySelector('.dayOneTemp').innerText = data.daily[0].temp;
+      
+        },
+    search: function () {
+        this.fetchWeather(document.querySelector('.search-bar').value);
+   
+    } 
+    
+
 };
 
 document.querySelector('.search button').addEventListener('click', function () {
@@ -54,22 +112,39 @@ document.querySelector('.search-bar').addEventListener('keyup', function(e) {
 
 weather.fetchWeather('Tempe');
 
-let forcast = {
-    fetchForcast: function(city) {
-        fetch(
-            "https://api.openweathermap.org/data/2.5/forcast?q=" 
-            + city + "&units=imperial&appid=" 
-            + apiKey
-        )
-        .then((response) => response.json())
-        .then((data) => this.displayWeather(data))
-    },
-displayForcast: function(data) {
-    const { name } = data;
-    const { description } = data.weather[0];
-    const { temp, humidity } = data.main;
-    const { speed } = data.wind;
-    const { visibility } = data.visibility;
-    console.log(name,description,temp,humidity,speed, visibility)
+const dayOneTemp = document.querySelector('.dayOneTemp')
+const dayOneDescription = document.querySelector('.dayOneDescription')
+const dayOneWind = document.querySelector('.dayOneWind')
+const dayOneHumidity = document.querySelector('.dayOneHumidity')
+const dayOneVisibility = document.querySelector('dayOneVisibility')
+
+const dayTwoTemp = document.querySelector('.dayTwoTemp')
+const dayThreeTemp = document.querySelector('.dayThreeTemp')
+const dayFourTemp = document.querySelector('.dayFourTemp')
+const dayFiveTemp = document.querySelector('.dayFiveTemp')
+
+function buildDashboard(data) {
+    // fiveDayWeather.style.display = "block";
+  
+    // dayOne(data);
+    // dayTwo(weather);
+    // dayThree(weather);
+    // dayFour(weather);
+    // dayFive(weather);
+  }
+
+function dayOne(daily) {
+    var temp = daily[0];
+    dayOneTemp.innerHTML = `Temp: ${temp}° F`
+
 }
-}
+
+function storedCities() {
+    let city = JSON.parse(localStorage.getItem("city"));
+    const button = document.createElement("button");
+    
+    button.append(city);
+    button.classList.add("recent-search");
+    
+    document.querySelector("#recent-search").append(button);
+  }

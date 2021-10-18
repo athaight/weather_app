@@ -3,6 +3,8 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    position: relative;
+    flex-wrap: wrap;
     height: 100vh;
     margin: 0;
     background: #222;
@@ -10,6 +12,42 @@ body {
     background-image: url('https://source.unsplash.com/1600x900/?nature,landscape');
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#search {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 0;
+}
+
+.recent {
+    background-color: #000000d0;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+}
+
+.recent-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #000000d0;
+    width: 200px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    margin:10px;
+    font-size: 20px;
+}
+
+.recent-search:hover {
+    background: #7c7c7c2b;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    border: 5px solid #9999998b;   
 }
 
 .card {
@@ -22,14 +60,7 @@ body {
     color: white;
 }
 
-#search {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   margin: 0;
-}
-
-button {
+.button {
    border: none;
    border-radius: 50%;
    width: 3.5em;
@@ -38,7 +69,7 @@ button {
    color: white;
 }
 
-button:hover {
+.button:hover {
     background: #7c7c7c6b;
     cursor: pointer;
     transition: 0.2s ease-in-out;
@@ -62,11 +93,12 @@ input{
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
+    /* flex-grow: 3; */
     background: #000000d0;
     padding: 2em;
     border-radius: 30px;
     width: 100%;
-    height: 330px;
+    height: auto;
     max-width: 55%;
     margin: 1em;
     color: white;
@@ -74,9 +106,13 @@ input{
 
 .days {
     width: 200px;
-    height: 250px;
+    height: auto;
     background-color: #7c7c7c2b;
     font-size: 16px;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 10px;
+    margin: 1em;
 }
 
 .weather.loading {
@@ -94,3 +130,4 @@ input{
     top: 0;
     left: 20px;
 }
+
