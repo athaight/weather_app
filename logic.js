@@ -1,7 +1,7 @@
 const today = new Date();
 
-let dayName = today.toDateString();
-let date =  dayName;
+let dateReadable = today.toDateString();
+let date =  dateReadable;
 
 let day = today.getDay();
 let month = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -9,6 +9,7 @@ let year = today.getFullYear();
 let hour = String(today.getHours());
 let minutes = String(today.getMinutes());
 
+//TODO how to make in more readable format with day name
 let dayOneDay = String(today.getDate() +1).padStart(2, '0')
 let dayTwoDay = String(today.getDate() +2).padStart(2, '0')
 let dayThreeDay = String(today.getDate() +3).padStart(2, '0')
@@ -21,7 +22,7 @@ let dateThree = month + '/' + dayThreeDay + '/' + year;
 let dateFour = month + '/' + dayFourDay + '/' + year;
 let dateFive = month + '/' + dayFiveDay + '/' + year;
 
-console.log('dayOneDay: ' + dayOneDay + ' dayTwoDay: ' + dayTwoDay)
+// console.log('dayOneDay: ' + dayOneDay + ' dayTwoDay: ' + dayTwoDay)
 
 const fiveDayWeather = document.querySelector("#fiveDayWeather");
 // fiveDayWeather.style.display = "none";
@@ -38,7 +39,7 @@ let oneCall = "https://api.openweathermap.org/data/2.5/onecall?";
 
 // TODO Introduce for loop to get data for current day (fiveDay)
 
-
+// Working properly
 function fetchWeather(city) {
     localStorage.setItem("city", JSON.stringify(city));
     storedCities();
@@ -59,7 +60,6 @@ function fetchWeather(city) {
         return fetch(oneCall + params);
         })
         .then((response) => response.json())
-        // .then((data) => this.displayWeather(data))
         .then(displayWeather);
 
 }
@@ -70,28 +70,62 @@ function displayWeather(weather) {
     // TODO Why / How : not right/to fix 
     const descr = weather.current.weather[1];
     const description = weather.current.weather.description;
-
+    // console.log(descr)
+    // console.log(description)
+    
+    //All ok below here (except where todos exist)
     const { temp, humidity, visibility, wind_speed:speed } = weather.current;
+    // console.log(city,description,temp,humidity,visibility,speed);
     const uvi = weather.current.uvi;
-    console.log("UVI = " + uvi + "_" + descr)
-    console.log(city,description,temp,humidity,visibility,speed);
+    
+    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + city + "-City')";
+    
     document.querySelector('.city').innerText = city;
     document.querySelector('.date').innerText = date;
+    // TODO part of above issue with description
     document.querySelector('.description').innerText = description;
+    
     document.querySelector('.temp').innerText = temp + "° f";
     document.querySelector('.humidity').innerText = "Humidity: " + humidity + "%";
     document.querySelector('.wind').innerText = "Wind Speed: " + speed + " mph";
     document.querySelector('.uvi').innerText = "UVI: " + uvi;
     document.querySelector('.visibility').innerText = "Visibility: " + visibility;
     document.querySelector('.weather').classList.remove("loading");
-
+    
     document.querySelector('.dayOneDate').innerText = today1;
+    document.querySelector('.dayOneTemp').innerText = "Temp: " + weather.daily[1].temp.max + "° f";
+    document.querySelector('.dayOneWind').innerText = "Wind Speed: " + weather.daily[1].wind_speed + " mph";
+    document.querySelector('.dayOneHumidity').innerText = "Humidity: " + weather.daily[1].humidity;
+    document.querySelector('.dayOneUvi').innerText = "UVI: " + weather.daily[1].uvi;
+    document.querySelector('.dayOneVisibility').innerText = "Moon Phase: " + weather.daily[1].moon_phase;
+    
     document.querySelector('.dayTwoDate').innerText = today2;
+    document.querySelector('.dayTwoTemp').innerText = "Temp: " + weather.daily[2].temp.max + "° f";
+    document.querySelector('.dayTwoWind').innerText = "Wind Speed: " + weather.daily[2].wind_speed + " mph";
+    document.querySelector('.dayTwoHumidity').innerText = "Humidity: " + weather.daily[2].humidity;
+    document.querySelector('.dayTwoUvi').innerText = "UVI: " + weather.daily[2].uvi;
+    document.querySelector('.dayTwoVisibility').innerText = "Moon Phase: " + weather.daily[2].moon_phase;
+
     document.querySelector('.dayThreeDate').innerText = today3;
+    document.querySelector('.dayThreeTemp').innerText = "Temp: " + weather.daily[3].temp.max + "° f";
+    document.querySelector('.dayThreeWind').innerText = "Wind Speed: " + weather.daily[3].wind_speed + " mph";
+    document.querySelector('.dayThreeHumidity').innerText = "Humidity: " + weather.daily[3].humidity;
+    document.querySelector('.dayThreeUvi').innerText = "UVI: " + weather.daily[3].uvi;
+    document.querySelector('.dayThreeVisibility').innerText = "Moon Phase: " + weather.daily[3].moon_phase;
+
     document.querySelector('.dayFourDate').innerText = today4;
+    document.querySelector('.dayFourTemp').innerText = "Temp: " + weather.daily[4].temp.max + "° f";
+    document.querySelector('.dayFourWind').innerText = "Wind Speed: " + weather.daily[4].wind_speed + " mph";
+    document.querySelector('.dayFourHumidity').innerText = "Humidity: " + weather.daily[4].humidity;
+    document.querySelector('.dayFourUvi').innerText = "UVI: " + weather.daily[4].uvi;
+    document.querySelector('.dayFourVisibility').innerText = "Moon Phase: " + weather.daily[4].moon_phase;
+
     document.querySelector('.dayFiveDate').innerText = today5;
-    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + city + "-City')";
-    document.querySelector('.dayOneTemp').innerText = weather.daily[1].temp.max;
+    document.querySelector('.dayFiveTemp').innerText = "Temp: " + weather.daily[5].temp.max + "° f";
+    document.querySelector('.dayFiveWind').innerText = "Wind Speed: " + weather.daily[5].wind_speed + " mph";
+    document.querySelector('.dayFiveHumidity').innerText = "Humidity: " + weather.daily[5].humidity;
+    document.querySelector('.dayFiveUvi').innerText = "UVI: " + weather.daily[5].uvi;
+    document.querySelector('.dayFiveVisibility').innerText = "Moon Phase: " + weather.daily[5].moon_phase;
 }
 
 // TODO Figure out why/how : notwork/to work
@@ -106,12 +140,6 @@ function uviBgColor() {
     };
   }
   uviBgColor();
-
-// function fiveDayData(data) {
-    //     const { temp } = data.current; 
-//     console.log(temp)
-// }
-// fiveDayData();
 
 function search() {
     this.fetchWeather(document.querySelector('.search-bar').value);
@@ -128,33 +156,6 @@ document.querySelector('.search-bar').addEventListener('keyup', function(e) {
 });
 
 fetchWeather('Tempe');
-
-const dayOneTemp = document.querySelector('.dayOneTemp')
-const dayOneDescription = document.querySelector('.dayOneDescription')
-const dayOneWind = document.querySelector('.dayOneWind')
-const dayOneHumidity = document.querySelector('.dayOneHumidity')
-const dayOneVisibility = document.querySelector('dayOneVisibility')
-
-const dayTwoTemp = document.querySelector('.dayTwoTemp')
-const dayThreeTemp = document.querySelector('.dayThreeTemp')
-const dayFourTemp = document.querySelector('.dayFourTemp')
-const dayFiveTemp = document.querySelector('.dayFiveTemp')
-
-function buildDashboard(data) {
-    // fiveDayWeather.style.display = "block";
-  
-    // dayOne(data);
-    // dayTwo(weather);
-    // dayThree(weather);
-    // dayFour(weather);
-    // dayFive(weather);
-  }
-
-function dayOne(daily) {
-    var temp = daily[0];
-    dayOneTemp.innerHTML = `Temp: ${temp}° F`
-
-}
 
 function storedCities() {
     let city = JSON.parse(localStorage.getItem("city"));
