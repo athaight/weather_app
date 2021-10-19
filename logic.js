@@ -167,4 +167,4 @@ function storedCities() {
     button.classList.add("recent-search");
     
     document.querySelector("#recent-search").append(button);
-  }
+}
