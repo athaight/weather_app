@@ -34,7 +34,7 @@ const today4 = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()
 const today5 = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+5);
 
 const apiKey = "8b4d320427abe778710968ffa0a03a6c"
-let geoLoc = "http://api.openweathermap.org/geo/1.0/direct?";
+let geoLoc = "https://api.openweathermap.org/geo/1.0/direct?";
 let oneCall = "https://api.openweathermap.org/data/2.5/onecall?";
 
 // TODO Introduce for loop to get data for current day (fiveDay)
