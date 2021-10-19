@@ -82,6 +82,7 @@ function displayWeather(weather) {
     
     document.querySelector('.city').innerText = city;
     document.querySelector('.date').innerText = date;
+    
     // TODO part of above issue with description
     document.querySelector('.description').innerText = description;
     
@@ -91,41 +92,42 @@ function displayWeather(weather) {
     document.querySelector('.uvi').innerText = "UVI: " + uvi;
     document.querySelector('.visibility').innerText = "Visibility: " + visibility;
     document.querySelector('.weather').classList.remove("loading");
-    
+    document.querySelector('.moonPhase').innerText = "Moon Phase: " + weather.daily[0].moon_phase;
+
     document.querySelector('.dayOneDate').innerText = today1;
     document.querySelector('.dayOneTemp').innerText = "Temp: " + weather.daily[1].temp.max + "° f";
     document.querySelector('.dayOneWind').innerText = "Wind Speed: " + weather.daily[1].wind_speed + " mph";
     document.querySelector('.dayOneHumidity').innerText = "Humidity: " + weather.daily[1].humidity;
     document.querySelector('.dayOneUvi').innerText = "UVI: " + weather.daily[1].uvi;
-    document.querySelector('.dayOneVisibility').innerText = "Moon Phase: " + weather.daily[1].moon_phase;
+    document.querySelector('.dayOneMoonPhase').innerText = "Moon Phase: " + weather.daily[1].moon_phase;
     
     document.querySelector('.dayTwoDate').innerText = today2;
     document.querySelector('.dayTwoTemp').innerText = "Temp: " + weather.daily[2].temp.max + "° f";
     document.querySelector('.dayTwoWind').innerText = "Wind Speed: " + weather.daily[2].wind_speed + " mph";
     document.querySelector('.dayTwoHumidity').innerText = "Humidity: " + weather.daily[2].humidity;
     document.querySelector('.dayTwoUvi').innerText = "UVI: " + weather.daily[2].uvi;
-    document.querySelector('.dayTwoVisibility').innerText = "Moon Phase: " + weather.daily[2].moon_phase;
+    document.querySelector('.dayTwoMoonPhase').innerText = "Moon Phase: " + weather.daily[2].moon_phase;
 
     document.querySelector('.dayThreeDate').innerText = today3;
     document.querySelector('.dayThreeTemp').innerText = "Temp: " + weather.daily[3].temp.max + "° f";
     document.querySelector('.dayThreeWind').innerText = "Wind Speed: " + weather.daily[3].wind_speed + " mph";
     document.querySelector('.dayThreeHumidity').innerText = "Humidity: " + weather.daily[3].humidity;
     document.querySelector('.dayThreeUvi').innerText = "UVI: " + weather.daily[3].uvi;
-    document.querySelector('.dayThreeVisibility').innerText = "Moon Phase: " + weather.daily[3].moon_phase;
+    document.querySelector('.dayThreeMoonPhase').innerText = "Moon Phase: " + weather.daily[3].moon_phase;
 
     document.querySelector('.dayFourDate').innerText = today4;
     document.querySelector('.dayFourTemp').innerText = "Temp: " + weather.daily[4].temp.max + "° f";
     document.querySelector('.dayFourWind').innerText = "Wind Speed: " + weather.daily[4].wind_speed + " mph";
     document.querySelector('.dayFourHumidity').innerText = "Humidity: " + weather.daily[4].humidity;
     document.querySelector('.dayFourUvi').innerText = "UVI: " + weather.daily[4].uvi;
-    document.querySelector('.dayFourVisibility').innerText = "Moon Phase: " + weather.daily[4].moon_phase;
+    document.querySelector('.dayFourMoonPhase').innerText = "Moon Phase: " + weather.daily[4].moon_phase;
 
     document.querySelector('.dayFiveDate').innerText = today5;
     document.querySelector('.dayFiveTemp').innerText = "Temp: " + weather.daily[5].temp.max + "° f";
     document.querySelector('.dayFiveWind').innerText = "Wind Speed: " + weather.daily[5].wind_speed + " mph";
     document.querySelector('.dayFiveHumidity').innerText = "Humidity: " + weather.daily[5].humidity;
     document.querySelector('.dayFiveUvi').innerText = "UVI: " + weather.daily[5].uvi;
-    document.querySelector('.dayFiveVisibility').innerText = "Moon Phase: " + weather.daily[5].moon_phase;
+    document.querySelector('.dayFiveMoonPhase').innerText = "Moon Phase: " + weather.daily[5].moon_phase;
 }
 
 // TODO Figure out why/how : notwork/to work
