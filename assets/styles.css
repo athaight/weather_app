@@ -5,7 +5,7 @@ body {
     align-items: center;
     position: relative;
     flex-wrap: wrap;
-    height: 100vh;
+    
     margin: 0;
     background: #222;
     font-family: 'Noto Sans Mono', monospace;
@@ -46,7 +46,7 @@ body {
     border-radius: 10px;
     color: white;
     padding: 10px;
-    margin:10px;
+    margin:5px;
     font-size: 20px;
 }
 
@@ -64,6 +64,7 @@ body {
     width: 100%;
     max-width: 400px;
     margin: 1em;
+    margin-top: 200px;
     color: white;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.555);
 }
