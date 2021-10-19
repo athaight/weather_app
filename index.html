@@ -14,16 +14,15 @@
 </head>
 
 <body>
-    <div>
-        <span><p class="cityName animate__fadeIn">CITY</p></span>
-    </div>
+    
     <div class="card">
         <div class="search">
                 <input type="text"class="search-bar" placeholder="Enter city here..."/>
                 <button class="button"><i class="fas fa-search"></i></i></button>
         </div>
+
         <div class="weather loading">
-            <h2 class="city">Weather in city</h2>
+            <h1 class="city">Weather in city</h1>
             <h3 class="date">Date</h3>
             <h2 id="temp" class="temp">Temp°:</h2>
             <p id="description" class="description">Cloudy</p>
@@ -32,10 +31,16 @@
             <p id="uvi" class="uvi">UVI:</p>
             <p id="visibility" class="visibility">Visibility:</p>
             <p class="moonPhase"></p>
+            <div class="recent">   
+                <h2>Recent Cities:</h2> 
+                <div id="recent-search" class=""></div>
+            </div>
         </div>
     </div>
-
+    <div class="forecast">
+    
     <div id="fiveDayWeather" class="container five-day">
+        <p class="forcastBoxName">Five day forecast:</p>
         <div id="dayOne" class="days">
             <p class="dayOneDate"></p>
             <p id="dayOneTemp" class="dayOneTemp">Temp°:</p>
@@ -45,6 +50,7 @@
             <p id="uvi" class="dayOneUvi">UVI:</p>
             <p class="dayOneMoonPhase"></p>
         </div>
+
         <div id="dayTwo" class="days">
             <p class="dayTwoDate"></p>
             <p id="dayTwoTemp" class="dayTwoTemp">Temp°:</p>
@@ -54,6 +60,7 @@
             <p id="uvi" class="dayTwoUvi">UVI:</p>
             <p class="dayTwoMoonPhase"></p>
         </div>
+
         <div id="dayThree" class="days">
             <p class="dayThreeDate"></p>
             <p id="dayThreeTemp" class="dayThreeTemp">Temp°:</p>
@@ -63,6 +70,7 @@
             <p id="uvi" class="dayThreeUvi">UVI:</p>
             <p class="dayThreeMoonPhase"></p>
         </div>
+
         <div id="dayFour" class="days">
             <p class="dayFourDate"></p>
             <p id="dayFourTemp" class="dayFourTemp">Temp°:</p>
@@ -72,6 +80,7 @@
             <p id="uvi" class="dayFourUvi">UVI:</p>
             <p class="dayFourMoonPhase"></p>
         </div>
+
         <div id="dayFive" class="days">
             <p class="dayFiveDate"></p>
             <p id="dayFiveTemp" class="dayFiveTemp">Temp°:</p>
@@ -82,11 +91,8 @@
             <p class="dayFiveMoonPhase"></p>
         </div>
     </div>
-
-    <div class="recent">   
-        <h2>Recent Cities:</h2> 
-        <div id="recent-search" class=""></div>
-    </div>
+</div>
+ 
   
 </body>
 </html>
