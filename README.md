@@ -52,8 +52,4 @@ https://user-images.githubusercontent.com/69359454/137948416-180c6076-b8b9-4a50-
 HTML/CSS/Javascript, OpenWeather API, source.unsplash.com (background images)
 
 ### Future Scope:
-Refactoring of code will be done in future builds, mobile responsiveness, UVI index color changing, cards that respond to weather changes and display the condition accordingly (i.e., rain image when raining, clouds, etc.) & icons for the current weather / moon phases. I would like to add a moon phase cycle display that highlights the current moon phase as an image. 
-
-### Licence: MIT
-
-### Contributors: Would you like to contribute to this? If so let me know!
+Refactoring of code will be done in future builds, mobile responsiveness, UVI index color changing, cards that respond to weather changes and display the condition accordingly (i.e., rain image when raining, clouds, etc.) & icons for the current weather / moon phases. I would like to add a moon phase cycle display that highlights the current moon phase as an image.
